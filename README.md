@@ -1,6 +1,6 @@
 # Shumai
 
-An argument management library with some smart abilities!
+A delicious new outlook on command line argument handling.
 
 *A note from the developer: Shumai is an early access package, if you have features you would like to see, please open an issue, I will work to implement all of the features within the scope of this project, and fix issues with current features as I go.*
 

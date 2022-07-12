@@ -54,6 +54,10 @@ describe("String.process (single word)", () => {
         let testShort = new Shumai([string], { source: "-t variable" });
         let testAbsent = new Shumai([string]);
 
+        testLong.parse()
+        testShort.parse()
+        testAbsent.parse()
+
         expect(testLong.values.test)
             .toBe("variable")
 
@@ -76,6 +80,10 @@ describe("String.process (double quotes)", () => {
         let testShort = new Shumai([string], { source: "-t \"longer variable\"" });
         let testAbsent = new Shumai([string]);
 
+        testLong.parse()
+        testShort.parse()
+        testAbsent.parse()
+
         expect(testLong.values.test)
             .toBe("longer variable")
 
@@ -97,6 +105,10 @@ describe("String.process (double quotes no ending)", () => {
         let testLong = new Shumai([string], { source: "--testArgument \"longer variable with no end" });
         let testShort = new Shumai([string], { source: "-t \"longer variable with no end" });
         let testAbsent = new Shumai([string]);
+
+        testLong.parse()
+        testShort.parse()
+        testAbsent.parse()
 
         expect(testLong.values.test)
             .toBe("longer variable with no end")

@@ -54,6 +54,10 @@ describe("Flag.process -> Boolean", () => {
         let testShort = new Shumai([flag], { source: "-t" });
         let testAbsent = new Shumai([flag]);
 
+        testLong.parse()
+        testShort.parse()
+        testAbsent.parse()
+
         expect(testLong.values.test)
             .toBe(true)
 

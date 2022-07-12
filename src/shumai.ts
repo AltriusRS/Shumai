@@ -16,6 +16,8 @@ class Shumai {
     };
     options: QualifiedOptions;
 
+    args: Argument[];
+
     name?: string;
     version?: string;
     description?: string;
@@ -23,11 +25,14 @@ class Shumai {
 
     constructor(args: Argument[] = [], opts: ShumaiOpts = {}) {
         this.options = validateOptions(opts);
+        this.args = args;
+    };
 
-        if (args.length > 0) {
+    parse() {
+        if (this.args.length > 0) {
             if (!(this.options.source instanceof Array)) this.options.source = this.options.source.split(" ");
-            for (let argId in args) {
-                let arg = args[argId];
+            for (let argId in this.args) {
+                let arg = this.args[argId];
 
                 if (arg.name === undefined) console.log(`Argument cannot be processed, no name...`)
                 else if (arg.name === "__quarrel") throw new Error("Illegal argument name: '__quarrel', name reserved for internal usages.")
@@ -36,9 +41,7 @@ class Shumai {
                 }
             }
         }
-    };
-
-
+    }
 }
 
 export default {

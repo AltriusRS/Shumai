@@ -1,8 +1,8 @@
 {
   "name": "shumai",
-  "version": "0.1.0",
-  "description": "A delicious new outlook on command line argument handling",
-  "main": "src/index.ts",
+  "version": "0.1.1",
+  "description": "A delicious new outlook on command line argument handling.",
+  "main": "src/shumai.ts",
   "scripts": {
     "test": "bun wiptest"
   },
