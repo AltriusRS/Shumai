@@ -11,7 +11,7 @@ A delicious new outlook on command line argument handling.
 To install, firstly ensure you have the [Bun](https://bun.sh) runtime installed on your system. Then, you can use the following command to add to your project.
 
 ```sh
-bun install shumai
+bun add shumai
 ```
 
 > ### **Using WSL?**
