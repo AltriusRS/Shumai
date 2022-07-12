@@ -16,7 +16,7 @@ bun add shumai
 
 > ### **Using WSL?**
 >
-> One known issue with Bun on WSL is that it fails to install packages due to a "NotSameFilesystem" error, this can be fixed by appending the `install` command with  --backend=copyfile`
+> One known issue with Bun on WSL is that it fails to install packages due to a "NotSameFilesystem" error, this can be fixed by appending the `add` command with  --backend=copyfile`
 
 ## Basic application
 

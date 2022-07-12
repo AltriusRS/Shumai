@@ -4,8 +4,12 @@ import { getRuntime } from "./runtime";
 
 import Flag from "./kinds/Flag";
 import String from "./kinds/String";
-import { DefaultOptions, QualifiedOptions, ShumaiOpts, validateOptions } from "./opts";
+import { QualifiedOptions, ShumaiOpts, validateOptions } from "./opts";
 
+
+/**
+ * The class that makes the magic happen.
+ */
 class Shumai {
     VERSION: string = "0.0.1";
     values: any = {
@@ -18,16 +22,33 @@ class Shumai {
 
     args: Argument[];
 
+    /**
+     * Application name. Used in help command.
+     */
     name?: string;
+
+    /**
+     * Application version. Used in help command.
+     */
     version?: string;
+
+    /**
+     * Application description. Used in help command.
+     */
     description?: string;
 
-
+    /**
+     * Initialize a new application, with all of your arguments.
+     */
     constructor(args: Argument[] = [], opts: ShumaiOpts = {}) {
         this.options = validateOptions(opts);
         this.args = args;
     };
 
+    /**
+     * Using the arguments provided, take the input source and conver it 
+     * into values stored in the `values` key
+     */
     parse() {
         if (this.args.length > 0) {
             if (!(this.options.source instanceof Array)) this.options.source = this.options.source.split(" ");

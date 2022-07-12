@@ -1,3 +1,6 @@
+/**
+ * An interface defining the requirements of all Argument prototypes
+ */
 export interface Argument {
     name?: string;
     description?: string

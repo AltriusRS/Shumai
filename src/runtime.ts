@@ -1,3 +1,4 @@
+// Determine runtime environment and use `logWarning` to log warnings, if appropriate.
 export function getRuntime(): any {
     if (typeof Bun !== "undefined") return runtimes.BUN;
     if (typeof Deno !== "undefined") {
