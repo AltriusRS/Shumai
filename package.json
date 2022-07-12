@@ -1,0 +1,22 @@
+{
+  "name": "shumai",
+  "version": "0.1.0",
+  "description": "A delicious new outlook on command line argument handling",
+  "main": "src/index.ts",
+  "scripts": {
+    "test": "bun wiptest"
+  },
+  "keywords": [
+    "commander",
+    "shumai",
+    "argv",
+    "cli",
+    "bun"
+  ],
+  "author": "AltriusRS",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/jest": "^28.1.4",
+    "bun-types": "^0.1.2"
+  }
+}
