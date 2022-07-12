@@ -201,8 +201,6 @@ describe("String.onMissing (with Illegal Async)", () => {
         try {
             let string = new String()
                 .withName("test")
-                .withIdentifier("testArgument")
-                .withShortIdentifier("t")
                 .setRequired(true)
                 .onMissing(async (text: string[]) => {
                     console.log(text);
@@ -222,8 +220,6 @@ describe("String.process (with callback)", () => {
 
         let string = new String()
             .withName("test")
-            .withIdentifier("testArgument")
-            .withShortIdentifier("t")
             .setRequired(true)
             .onMissing((_text: string[]) => {
                 return null;
