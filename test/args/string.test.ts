@@ -193,3 +193,47 @@ describe("String.process (required with default)", () => {
             .toBe("testing")
     })
 })
+
+
+describe("String.onMissing (with Illegal Async)", () => {
+    it("returns the value of the argument requested, or null if unavailable", () => {
+        let errored = false;
+        try {
+            let string = new String()
+                .withName("test")
+                .withIdentifier("testArgument")
+                .withShortIdentifier("t")
+                .setRequired(true)
+                .onMissing(async (text: string[]) => {
+                    console.log(text);
+                });
+        } catch (e) {
+            console.log("IllegalAsyncCallback error threw as expected");
+            errored = true;
+        }
+
+        expect(errored)
+            .toBe(true)
+    })
+})
+
+describe("String.process (with callback)", () => {
+    it("returns the value of the argument requested, or null if unavailable", () => {
+
+        let string = new String()
+            .withName("test")
+            .withIdentifier("testArgument")
+            .withShortIdentifier("t")
+            .setRequired(true)
+            .onMissing((_text: string[]) => {
+                return null;
+            });
+
+        let testAbsent = new Shumai([string]);
+
+        testAbsent.parse()
+
+        expect(testAbsent.values.test)
+            .toBe(null)
+    })
+})

@@ -1,7 +1,10 @@
-import { AdvancedArgument } from "./Argument";
+import { IllegalAsyncCallback } from "../errors";
+import { AdvancedArgument, EventCallback } from "./Argument";
 
 /**
  * A String argument is a way to convert user input into a string which can be processed by your application.
+ * 
+ * It implements the AdvancedArgument model, which adds a method that gets called if `default` is undefined, __and__ `required` is `true`
  * 
  * @example
  * ```ts
@@ -15,6 +18,7 @@ export default class String implements AdvancedArgument {
     short: string | undefined;
     required: boolean = false;
     default?: string;
+    missing?: EventCallback;
 
     constructor(name?: string, id?: string, shortId?: string, required?: boolean, defaultValue?: string) {
         this.name = name;
@@ -76,6 +80,17 @@ export default class String implements AdvancedArgument {
         return this;
     }
 
+    onMissing(cb: EventCallback): String {
+        let isAsync = cb.constructor.name === "AsyncFunction";
+
+        if (isAsync) {
+            throw new IllegalAsyncCallback("\x1b[33mAdvancedArgument#onMissing\x1b[0m may only be provided with a synchronous method.");
+        } else {
+            this.missing = cb;
+            return this;
+        }
+    }
+
     /**
      * Takes an array of strings (split at whitespace), and parses them into the resulting arguments based off of internal values set using the builder methods.
      * @param input
@@ -93,19 +108,17 @@ export default class String implements AdvancedArgument {
             value = returnValue(input, input.indexOf(`-${this.short}`))
         }
 
-        // Not Implemented feature to prompt the user for 
-        // an input if it is not provided
-        // if (this.onMissing) {
-        //     this.onMissing()
-        // }
-
         if (!value && this.default !== undefined) return this.default;
         if (!value && this.required) {
-            let display = this.id ? this.id : this.name;
-            console.log(`\x1b[31mError\x1b[0m: The argument '${display}' is required.\nTo prevent further errors, this process will now exit`);
-            if (!process.env.TEST_PREVENT_EXIT) {
-                process.exit()
-            } else return null;
+            if (this.missing) {
+                value = this.missing(input);
+            } else {
+                let display = this.id ? this.id : this.name;
+                console.log(`\x1b[31mError\x1b[0m: The argument '${display}' is required.\nTo prevent further errors, this process will now exit`);
+                if (!process.env.TEST_PREVENT_EXIT) {
+                    process.exit()
+                } else return null;
+            }
         }
         return value;
     }
