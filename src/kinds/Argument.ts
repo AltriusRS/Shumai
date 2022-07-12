@@ -5,6 +5,8 @@ export interface Argument {
     name?: string;
     description?: string
     shortDescription?: string;
+    required: boolean;
+    default?: any
 
     process(input: string[]): any;
 }

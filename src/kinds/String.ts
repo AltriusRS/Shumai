@@ -13,9 +13,15 @@ export default class String implements AdvancedArgument {
     name: string | undefined;
     id: string | undefined;
     short: string | undefined;
-    takes: string = "string"
+    required: boolean = false;
+    default?: string;
 
-    constructor() {
+    constructor(name?: string, id?: string, shortId?: string, required?: boolean, defaultValue?: string) {
+        this.name = name;
+        this.id = id;
+        this.short = shortId;
+        this.required = required ? required : false;
+        this.default = defaultValue ? defaultValue : undefined;
     }
 
     /**
@@ -49,6 +55,28 @@ export default class String implements AdvancedArgument {
     }
 
     /**
+     * Sets whether or not the argument is required. If required but not present, 
+     * the application will log an error and then exit
+     * @param required
+     * @returns The updated value of this argument.
+     */
+    setRequired(required: boolean = true): String {
+        this.required = required;
+        return this;
+    }
+
+    /**
+     * Set the default value to return if `required` is set, 
+     * but the flag is not present.
+     * @param value
+     * @returns The updated value of this argument.
+     */
+    setDefault(value: string = ""): String {
+        this.default = value;
+        return this;
+    }
+
+    /**
      * Takes an array of strings (split at whitespace), and parses them into the resulting arguments based off of internal values set using the builder methods.
      * @param input
      * @returns A string representing the value of the flag, if present, or `null` if not.
@@ -70,6 +98,13 @@ export default class String implements AdvancedArgument {
         // if (this.onMissing) {
         //     this.onMissing()
         // }
+
+        if (!value && this.default !== undefined) return this.default;
+        if (!value && this.required) {
+            let display = this.id ? this.id : this.name;
+            console.log(`\x1b[31mError\x1b[0m]: The argument '${display}' is required.\nTo prevent further errors, this process will now exit`);
+            process.exit();
+        }
         return value;
     }
 }

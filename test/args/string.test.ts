@@ -69,6 +69,40 @@ describe("String.process (single word)", () => {
     })
 })
 
+describe("String.setRequired -> String", () => {
+    it("ensures the argument is required, or optional, depending on it's value", () => {
+        let string = new String()
+            .withName("test")
+            .setRequired(true);
+        String
+        let string2 = new String()
+            .withName("test")
+
+        expect(string.required)
+            .toBe(true);
+
+        expect(string2.required)
+            .toBe(false);
+    })
+})
+
+describe("String.setDefault -> String", () => {
+    it("sets the default value to return if the argument is not present", () => {
+        let string = new String()
+            .withName("test")
+            .setDefault("default");
+
+        let string2 = new String()
+            .withName("test")
+
+        expect(string.default)
+            .toBe("default");
+
+        expect(string2.default)
+            .toBe(undefined);
+    })
+})
+
 describe("String.process (double quotes)", () => {
     it("returns the value of the argument requested, or null if unavailable", () => {
         let string = new String()

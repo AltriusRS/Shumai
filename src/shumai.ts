@@ -45,6 +45,12 @@ class Shumai {
         this.args = args;
     };
 
+    defineArgument(argument: Argument) {
+        this.args.push(argument);
+    }
+
+    addArg = this.defineArgument;
+
     /**
      * Using the arguments provided, take the input source and conver it 
      * into values stored in the `values` key

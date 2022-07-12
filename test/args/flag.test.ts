@@ -32,6 +32,40 @@ describe("Flag.withIdentifier -> Flag", () => {
     })
 })
 
+describe("Flag.setRequired -> Flag", () => {
+    it("ensures the argument is required, or optional, depending on it's value", () => {
+        let flag = new Flag()
+            .withName("test")
+            .setRequired(true);
+
+        let flag2 = new Flag()
+            .withName("test")
+
+        expect(flag.required)
+            .toBe(true);
+
+        expect(flag2.required)
+            .toBe(false);
+    })
+})
+
+describe("Flag.setDefault -> Flag", () => {
+    it("sets the default value to return if the flag is not present", () => {
+        let flag = new Flag()
+            .withName("test")
+            .setDefault(true);
+
+        let flag2 = new Flag()
+            .withName("test")
+
+        expect(flag.default)
+            .toBe(true);
+
+        expect(flag2.default)
+            .toBe(false);
+    })
+})
+
 describe("Flag.withShortIdentifier -> Flag", () => {
     it("the short argument to search for, if identifier isn't found", () => {
         let flag = new Flag()
@@ -66,5 +100,23 @@ describe("Flag.process -> Boolean", () => {
 
         expect(testAbsent.values.test)
             .toBe(false)
+    })
+})
+
+
+describe("Flag.process (required) -> Boolean", () => {
+    it("returns true if flag is present in input", () => {
+        let flag = new Flag()
+            .withName("test")
+            .withIdentifier("testflag")
+            .withShortIdentifier("t")
+            .setRequired(true)
+            .setDefault(true);
+        let testAbsent = new Shumai([flag]);
+
+        testAbsent.parse()
+
+        expect(testAbsent.values.test)
+            .toBe(true)
     })
 })
