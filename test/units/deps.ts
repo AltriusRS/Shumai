@@ -1,4 +1,4 @@
-import shumai from "../src/shumai";
+import shumai from "../../src/shumai";
 
 // Package version, keep in line with package.json, and src/quarrel.ts, 
 // otherwise tests will fail;

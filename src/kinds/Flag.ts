@@ -10,9 +10,9 @@ import { Argument } from "./Argument";
  * ```
  */
 export default class Flag implements Argument {
-    name: string | undefined;
-    id: string | undefined;
-    short: string | undefined;
+    name?: string;
+    id?: string;
+    short?: string;
     required: boolean = false;
     default?: boolean;
 

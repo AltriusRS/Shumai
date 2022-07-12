@@ -10,7 +10,7 @@ import { QualifiedOptions, ShumaiOpts, validateOptions } from "./opts";
 /**
  * The class that makes the magic happen.
  */
-class Shumai {
+class App {
     VERSION: string = "0.1.2";
     values: any = {
         __shumai: {
@@ -45,15 +45,59 @@ class Shumai {
         this.args = args;
     };
 
+    /**
+     * Takes an argument as its only parameter, and installs it 
+     * into the application for display either in the help menu, 
+     * or for use by you, the user.
+     */
     defineArgument(argument: Argument) {
         this.args.push(argument);
     }
 
+    /**
+     * Takes an argument as its only parameter, and installs it 
+     * into the application for display either in the help menu, 
+     * or for use by you, the user.
+     * 
+     * Alias for Shumai.
+     */
     addArg = this.defineArgument;
 
     /**
+     * Sets the application name shown in the stock help view.
+     * @param name 
+     * @returns the modified application
+     */
+    setName(name: string): App {
+        this.name = name;
+        return this;
+    }
+
+    /**
+     * Sets the application description shown in the stock help view.
+     * @param description 
+     * @returns the modified application
+     */
+    setDescription(description: string): App {
+        this.description = description;
+        return this;
+    }
+
+    /**
+     * Sets the application version shown in the stock help view, 
+     * and version view.
+     * @param version 
+     * @returns the modified application
+     */
+    setVersion(version: string): App {
+        this.version = version;
+        return this;
+    }
+
+
+    /**
      * Using the arguments provided, take the input source and conver it 
-     * into values stored in the `values` key
+     * into values stored in the `values` key.
      */
     parse() {
         if (this.args.length > 0) {
@@ -65,14 +109,22 @@ class Shumai {
                 else if (arg.name === "__quarrel") throw new Error("Illegal argument name: '__quarrel', name reserved for internal usages.")
                 else {
                     this.values[arg.name] = arg.process(this.options.source)
+                    if (arg.name === "help" && this.options.help && this.values.help) {
+                        this.options.help(this, this.options.source);
+                        process.exit();
+                    }
+                    if (arg.name === "version" && this.values.version) {
+                        console.log(`\n${this.name ? this.name : "Unknown Application"}\nVersion: ${this.version ? this.version : this.VERSION}\n`)
+                        process.exit();
+                    }
                 }
             }
         }
     }
 }
 
-export default {
+export {
     Flag,
     String,
-    Shumai
+    App
 }

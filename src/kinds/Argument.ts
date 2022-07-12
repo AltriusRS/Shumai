@@ -3,6 +3,8 @@
  */
 export interface Argument {
     name?: string;
+    id?: string;
+    short?: string;
     description?: string
     shortDescription?: string;
     required: boolean;

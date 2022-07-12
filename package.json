@@ -5,7 +5,9 @@
   "main": "src/shumai.ts",
   "scripts": {
     "test": "bun wiptest",
-    "testhelp": "bun tests/module/sample.ts -- -h"
+    "testhelp": "bun test/module/sample.ts -- -h",
+    "testversion": "bun test/module/sample.ts -- -v",
+    "testboth": "bun test/module/sample.ts -- -v && bun test/module/sample.ts -- -h"
   },
   "keywords": [
     "commander",

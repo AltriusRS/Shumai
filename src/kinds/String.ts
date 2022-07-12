@@ -13,9 +13,9 @@ import { AdvancedArgument, EventCallback } from "./Argument";
  * ```
  */
 export default class String implements AdvancedArgument {
-    name: string | undefined;
-    id: string | undefined;
-    short: string | undefined;
+    name?: string;
+    id?: string;
+    short?: string;
     required: boolean = false;
     default?: string;
     missing?: EventCallback;
