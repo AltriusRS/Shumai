@@ -62,7 +62,7 @@ describe("Flag.setDefault -> Flag", () => {
             .toBe(true);
 
         expect(flag2.default)
-            .toBe(false);
+            .toBe(undefined);
     })
 })
 
@@ -118,5 +118,23 @@ describe("Flag.process (required) -> Boolean", () => {
 
         expect(testAbsent.values.test)
             .toBe(true)
+    })
+})
+
+describe("Flag.process (required no defualt) -> Boolean", () => {
+    it("returns true if flag is present in input", () => {
+        let flag = new Flag()
+            .withName("test")
+            .withIdentifier("testflag")
+            .withShortIdentifier("t")
+            .setRequired(true)
+        let testAbsent = new Shumai([flag]);
+
+        console.log("\x1b[32mTHIS TEST SHOULD 'THROW' AN ERROR, BUT NOT EXIT (AND SHOULD PASS)\x1b[0m")
+
+        testAbsent.parse()
+
+        expect(testAbsent.values.test)
+            .toBe(null)
     })
 })

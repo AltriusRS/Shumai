@@ -23,7 +23,7 @@ export const DefaultOptions: ShumaiOpts = {
 // Converts the user-provided options from the ShumaiOpts format to 
 // the QualifiedOptions format, used internally for logic and parsing.
 export function validateOptions(opts: ShumaiOpts): QualifiedOptions {
-    let final = {
+    let final: QualifiedOptions = {
         source: process.argv,
         help: DefaultHelper
     }

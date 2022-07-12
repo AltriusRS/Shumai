@@ -154,3 +154,42 @@ describe("String.process (double quotes no ending)", () => {
             .toBe(null)
     })
 })
+
+
+describe("String.process (required no default)", () => {
+    it("returns the value of the argument requested, or null if unavailable", () => {
+        let string = new String()
+            .withName("test")
+            .withIdentifier("testArgument")
+            .withShortIdentifier("t")
+            .setRequired(true);
+
+        let testAbsent = new Shumai([string]);
+
+        console.log("\x1b[32mTHIS TEST SHOULD 'THROW' AN ERROR, BUT NOT EXIT (AND SHOULD PASS)\x1b[0m")
+
+        testAbsent.parse()
+
+        expect(testAbsent.values.test)
+            .toBe(null)
+    })
+})
+
+
+describe("String.process (required with default)", () => {
+    it("returns the value of the argument requested, or null if unavailable", () => {
+        let string = new String()
+            .withName("test")
+            .withIdentifier("testArgument")
+            .withShortIdentifier("t")
+            .setRequired(true)
+            .setDefault("testing");
+
+        let testAbsent = new Shumai([string]);
+
+        testAbsent.parse()
+
+        expect(testAbsent.values.test)
+            .toBe("testing")
+    })
+})

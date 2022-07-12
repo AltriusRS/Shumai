@@ -11,7 +11,7 @@ import { QualifiedOptions, ShumaiOpts, validateOptions } from "./opts";
  * The class that makes the magic happen.
  */
 class Shumai {
-    VERSION: string = "0.0.1";
+    VERSION: string = "0.1.2";
     values: any = {
         __shumai: {
             version: this.VERSION,

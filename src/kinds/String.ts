@@ -102,8 +102,10 @@ export default class String implements AdvancedArgument {
         if (!value && this.default !== undefined) return this.default;
         if (!value && this.required) {
             let display = this.id ? this.id : this.name;
-            console.log(`\x1b[31mError\x1b[0m]: The argument '${display}' is required.\nTo prevent further errors, this process will now exit`);
-            process.exit();
+            console.log(`\x1b[31mError\x1b[0m: The argument '${display}' is required.\nTo prevent further errors, this process will now exit`);
+            if (!process.env.TEST_PREVENT_EXIT) {
+                process.exit()
+            } else return null;
         }
         return value;
     }

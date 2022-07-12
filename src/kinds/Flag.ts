@@ -21,7 +21,7 @@ export default class Flag implements Argument {
         this.id = id;
         this.short = shortId;
         this.required = required ? required : false;
-        this.default = defaultValue ? defaultValue : false;
+        this.default = defaultValue ? defaultValue : undefined;
     }
 
 
@@ -83,7 +83,7 @@ export default class Flag implements Argument {
      * @param input
      * @returns A boolean representing if the flag is present.
      */
-    process(input: string[]): boolean {
+    process(input: string[]): boolean | null {
         if (this.id) {
             if (input.includes(`--${this.id}`)) return true;
         } else {
@@ -97,8 +97,10 @@ export default class Flag implements Argument {
         if (this.default !== undefined) return this.default;
         if (this.required) {
             let display = this.id ? this.id : this.name;
-            console.log(`\x1b[31mError\x1b[0m]: The argument '${display}' is required.\nTo prevent further errors, this process will now exit`);
-            process.exit();
+            console.log(`\x1b[31mError\x1b[0m: The argument '${display}' is required.\nTo prevent further errors, this process will now exit`);
+            if (!process.env.TEST_PREVENT_EXIT) {
+                process.exit()
+            } else return null;
         }
         return false;
     }
