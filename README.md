@@ -100,6 +100,6 @@ Here is a list of things that are either unfinished, or desireable. Got a featur
 | Status | Name | Description |
 |:------:|:----:|:-----------:|
 |Complete|required arguments|Adds the ability to mark an argument as required, causing Shumai to log the issue to the console and pre-emptively exit the application.|
-| Pending|onMissing event|A method which is called on required arguments, if no argument is present, but exiting is undesireable|
+|Complete|onMissing event|A method which is called on required arguments, if no argument is present, but exiting is undesireable|
 | Pending|multi-value argument|An argument kind which takes a command-seperated list of values, and returns them as an array|
 | Pending|per-argument event hooks|Adds the ability to implement custom processing logic for just one argument at a time|
