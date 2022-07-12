@@ -7,7 +7,6 @@ const VERSION: string = "0.1.2";
 // TestItem, used for all static tests (eg: tests which require no input processing)
 const TestItem = new shumai.Shumai();
 
-
 export {
     VERSION,
     TestItem,

@@ -2,6 +2,12 @@
 
 A delicious new outlook on command line argument handling.
 
+---
+![License](https://flat.badgen.net/github/license/altriusrs/shumai)
+![NPM Version](https://flat.badgen.net/npm/v/shumai)
+![Open Issues](https://flat.badgen.net/github/open-issues/altriusrs/shumai)
+![Github Stars](https://flat.badgen.net/github/stars/altriusrs/shumai)
+
 *A note from the developer: Shumai is an early access package, if you have features you would like to see, please open an issue, I will work to implement all of the features within the scope of this project, and fix issues with current features as I go.*
 
 > This project is only tested and developed for [Bun](https://bun.sh), any support for NodeJS, or Deno is coincidental and not intentional, please do not submit bug reports for those runtimes (at this time). Support for these runtimes is planned, but not in progress at this time.
