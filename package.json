@@ -4,7 +4,8 @@
   "description": "A delicious new outlook on command line argument handling.",
   "main": "src/shumai.ts",
   "scripts": {
-    "test": "bun wiptest"
+    "test": "bun wiptest",
+    "testhelp": "bun tests/module/sample.ts -- -h"
   },
   "keywords": [
     "commander",
